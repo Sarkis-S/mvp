@@ -5,10 +5,10 @@
   > PokémonTracker
 
 ## Sub-Heading ##
-  > This is for all the pokémon trainers in the world today who's goal is to "catch'em all!" or simply for those who need a bit more organization.
+  > This is for all the pokémon trainers in the world today whose goal is to "catch'em all!" or simply for those who need a bit more organization.
 
 ## Summary ##
-  > This fantasic app will allow the trainer to keep tabs on what pokémons they have. They simply enter the pokémon name and with a click of a button, that pokémon is saved! Easy! It also lets you see the basic details of other pokémon that is yet to be captured.
+  > This fantasic app will allow the trainer to keep tabs on what pokémons they own. They simply enter the pokémon name and with a click of a button, that pokémon is saved! Easy! It also lets you see the basic details of other pokémon that is yet to be captured.
 
 ## Problem ##
   > Often times trainers need to go in and out of their in-game pokédex to check out what pokémons they have. That's a lot of maneuvering of the user interface. No more! 
