@@ -1,0 +1,12 @@
+body {
+  background: rgb(239, 83, 80);
+}
+
+.pokemonName {
+  color: yellow;
+  font-size: 35px;
+}
+
+.getPokemon {
+  font-weight: bold;
+}
