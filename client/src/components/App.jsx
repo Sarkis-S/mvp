@@ -14,7 +14,7 @@ class App extends React.Component {
     this.handleNameChangeClick = this.handleNameChangeClick.bind(this);
     this.handleSavePokemon = this.handleSavePokemon.bind(this);
   }
-
+  // LIFE CYCLE METHODS
   componentDidMount() {
     let requestedPokemonId = 0;
     axios.get(`http://pokeapi.co/api/v2/pokemon/pikachu/`)
@@ -31,11 +31,7 @@ class App extends React.Component {
         this.setState({ pokemon: currentPokemon });
         requestedPokemonId = requestedPokemonInfo.data.id;
       })
-      .catch(error => {
-        console.log('Caught error from handleNameChangeClick:', error);
-      })
-      .finally(() => {
-        // GET POKEMON DESCRIPTION
+      .then(() => {
         axios.get(`http://pokeapi.co/api/v2/characteristic/${requestedPokemonId}/`)
           .then(response => {
             console.log('Description:', response.data.descriptions[1].description);
@@ -46,8 +42,11 @@ class App extends React.Component {
             console.log('Caught error from handleNameChangeClick GET characterstic with', error);
           })
       })
+      .catch(error => {
+        console.log('Caught error from handleNameChangeClick:', error);
+      })
   }
-
+  // ALL THE METHODS
   handleNameChange(e) {
     this.setState({ name: e.target.value });
   }
@@ -70,10 +69,7 @@ class App extends React.Component {
         this.setState({ pokemon: currentPokemon });
         requestedPokemonId = requestedPokemonInfo.data.id;
       })
-      .catch(error => {
-        console.log('Caught error from handleNameChangeClick:', error);
-      })
-      .finally(() => {
+      .then(() => {
         // GET POKEMON DESCRIPTION
         axios.get(`http://pokeapi.co/api/v2/characteristic/${requestedPokemonId}/`)
           .then(response => {
@@ -84,6 +80,9 @@ class App extends React.Component {
             this.setState({ description: 'No data from PokéAPI'})
             console.log('Caught error from handleNameChangeClick GET characterstic with', error);
           })
+      })
+      .catch(error => {
+        console.log('Caught error from handleNameChangeClick:', error);
       })
   }
 
@@ -97,7 +96,7 @@ class App extends React.Component {
         console.log('ERROR:', error);
       })
   }
-
+  // RENDER THE CODE
   render() {
     return (
       <div>

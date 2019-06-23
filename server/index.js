@@ -10,9 +10,13 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 app.use(express.static(__dirname + '/../public'));
 
-// Create APIs HERE
+// This route should pull all saved pokemons for rendering to the client
+app.get('/pokemon', (request, response) => {
+  // I want to grab all saved pokemons
+})
+
+// This route will should save all pokemons to database
 app.post('/pokemon', (request, response) => {
-  console.log('HERE IS THE POST REQUEST:', request.body);
   const newPokemon = new Pokemon(request.body);
   newPokemon.save((error) => {
     if (error) {
