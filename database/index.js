@@ -9,12 +9,12 @@ db.once('open', () => {
 });
 
 const pokemonSchema = new mongoose.Schema({
-  pokemon_id: Number,
+  id: Number,
   name: String,
+  sprite: String,
   height: Number,
   weight: Number,
-  type: String,
-  description: String
+  type: String
 });
 
 const Pokemon = mongoose.model('Pokemon', pokemonSchema);

@@ -12,6 +12,7 @@ class App extends React.Component {
     }
     this.handleNameChange = this.handleNameChange.bind(this);
     this.handleNameChangeClick = this.handleNameChangeClick.bind(this);
+    this.handleSavePokemon = this.handleSavePokemon.bind(this);
   }
 
   componentDidMount() {
@@ -86,16 +87,30 @@ class App extends React.Component {
       })
   }
 
+  handleSavePokemon() {
+    console.log('POST REQUEST', this.state.pokemon);
+    axios.post('/pokemon', this.state.pokemon)
+      .then(()=> {
+        console.log('Successful post');
+      })
+      .catch((error) => {
+        console.log('ERROR:', error);
+      })
+  }
+
   render() {
     return (
       <div>
         <div className="pokemonName">Pokémon Name</div>
-        <input type="text" name="name" value={this.state.value}
+        <input type="text" className="inputBox" value={this.state.value}
           onChange={ (e) => {this.handleNameChange(e)} }>
         </input>
         <br></br>
         <button type="button" className="getPokemon" onClick={this.handleNameChangeClick}>
           GET Pokémon
+        </button>
+        <button type="button" className="savePokemon" onClick={this.handleSavePokemon}>
+          Save Pokémon
         </button>
 
         <div>

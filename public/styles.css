@@ -7,6 +7,12 @@ body {
   font-size: 35px;
 }
 
+.inputBox {
+  width: 191px;
+}
 .getPokemon {
+  font-weight: bold;
+}
+.savePokemon {
   font-weight: bold;
 }
