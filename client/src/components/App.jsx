@@ -37,7 +37,7 @@ class App extends React.Component {
         // GET POKEMON DESCRIPTION
         axios.get(`http://pokeapi.co/api/v2/characteristic/${requestedPokemonId}/`)
           .then(response => {
-            console.log('RESPONSE:', response.data.descriptions[1].description);
+            console.log('Description:', response.data.descriptions[1].description);
             this.setState({ description: response.data.descriptions[1].description});
           })
           .catch(error => {
@@ -45,7 +45,6 @@ class App extends React.Component {
             console.log('Caught error from handleNameChangeClick GET characterstic with', error);
           })
       })
-      
   }
 
   handleNameChange(e) {
@@ -77,7 +76,7 @@ class App extends React.Component {
         // GET POKEMON DESCRIPTION
         axios.get(`http://pokeapi.co/api/v2/characteristic/${requestedPokemonId}/`)
           .then(response => {
-            console.log('RESPONSE:', response.data.descriptions[1].description);
+            console.log('Description:', response.data.descriptions[1].description);
             this.setState({ description: response.data.descriptions[1].description});
           })
           .catch(error => {
@@ -90,7 +89,6 @@ class App extends React.Component {
   render() {
     return (
       <div>
-          
         <div className="pokemonName">Pokémon Name</div>
         <input type="text" name="name" value={this.state.value}
           onChange={ (e) => {this.handleNameChange(e)} }>
@@ -108,9 +106,7 @@ class App extends React.Component {
           <div>Weight: {this.state.pokemon.weight}</div> 
           <div>Type: {this.state.pokemon.type}</div>
           <div>Description: {this.state.description}</div>
-          
         </div>
-
       </div>
     );
   }
