@@ -7,13 +7,15 @@ class App extends React.Component {
     super(props);
     this.state = {
       name: '',
-      pokemon: ''
+      pokemon: '',
+      description: ''
     }
     this.handleNameChange = this.handleNameChange.bind(this);
     this.handleNameChangeClick = this.handleNameChangeClick.bind(this);
   }
 
   componentDidMount() {
+    let requestedPokemonId = 0;
     axios.get(`http://pokeapi.co/api/v2/pokemon/pikachu/`)
       .then(response => {
         let requestedPokemonInfo = response;
@@ -24,13 +26,26 @@ class App extends React.Component {
           height: requestedPokemonInfo.data.height,
           weight: requestedPokemonInfo.data.weight,
           type: requestedPokemonInfo.data.types[0].type.name,
-          location: requestedPokemonInfo.data.location_area_encounters
         }
         this.setState({ pokemon: currentPokemon });
+        requestedPokemonId = requestedPokemonInfo.data.id;
       })
       .catch(error => {
         console.log('Caught error from handleNameChangeClick:', error);
       })
+      .finally(() => {
+        // GET POKEMON DESCRIPTION
+        axios.get(`http://pokeapi.co/api/v2/characteristic/${requestedPokemonId}/`)
+          .then(response => {
+            console.log('RESPONSE:', response.data.descriptions[1].description);
+            this.setState({ description: response.data.descriptions[1].description});
+          })
+          .catch(error => {
+            this.setState({ description: 'No data from PokéAPI'})
+            console.log('Caught error from handleNameChangeClick GET characterstic with', error);
+          })
+      })
+      
   }
 
   handleNameChange(e) {
@@ -39,6 +54,8 @@ class App extends React.Component {
 
   handleNameChangeClick() {
     let requestedPokemon = this.state.name;
+    let requestedPokemonId = 0;
+    // GET POKEMON DETAILS
     axios.get(`http://pokeapi.co/api/v2/pokemon/${requestedPokemon}/`)
       .then(response => {
         let requestedPokemonInfo = response;
@@ -48,13 +65,25 @@ class App extends React.Component {
           sprite: requestedPokemonInfo.data.sprites.front_default,
           height: requestedPokemonInfo.data.height,
           weight: requestedPokemonInfo.data.weight,
-          type: requestedPokemonInfo.data.types[0].type.name,
-          location: requestedPokemonInfo.data.location_area_encounters
+          type: requestedPokemonInfo.data.types[0].type.name
         }
         this.setState({ pokemon: currentPokemon });
+        requestedPokemonId = requestedPokemonInfo.data.id;
       })
       .catch(error => {
         console.log('Caught error from handleNameChangeClick:', error);
+      })
+      .finally(() => {
+        // GET POKEMON DESCRIPTION
+        axios.get(`http://pokeapi.co/api/v2/characteristic/${requestedPokemonId}/`)
+          .then(response => {
+            console.log('RESPONSE:', response.data.descriptions[1].description);
+            this.setState({ description: response.data.descriptions[1].description});
+          })
+          .catch(error => {
+            this.setState({ description: 'No data from PokéAPI'})
+            console.log('Caught error from handleNameChangeClick GET characterstic with', error);
+          })
       })
   }
 
@@ -78,7 +107,7 @@ class App extends React.Component {
           <div>Height: {this.state.pokemon.height}</div>
           <div>Weight: {this.state.pokemon.weight}</div> 
           <div>Type: {this.state.pokemon.type}</div>
-          {/* <div>Location:{this.state.pokemon.location}</div> */}
+          <div>Description: {this.state.description}</div>
           
         </div>
 
