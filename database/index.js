@@ -30,7 +30,20 @@ let getPokemonForServer = (callback => {
   })
   // Control how many shows up to client
   // .limit(25)
-})
+});
+
+let removePokemonForServer = (request, response) => {
+  let currentPokemon = request;
+  console.log('CURRENT POKEMON', currentPokemon);
+  Pokemon.deleteOne({ name: currentPokemon }, function(error) {
+    if (error) {
+      console.log('ERROR deleting', error);
+    } else {
+      console.log('Deletion succeeded');
+    }
+  });
+};
 
 module.exports.getPokemonForServer = getPokemonForServer;
+module.exports.removePokemonForServer = removePokemonForServer;
 module.exports.Pokemon = Pokemon;

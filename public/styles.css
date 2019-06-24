@@ -1,16 +1,22 @@
 body {
-  background: rgb(239, 83, 80);
+  background-image: url("https://wallpapercave.com/wp/wp2530750.jpg");
+  background-size: cover;
 }
-
+.buttons {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 5px;
+}
 .mainBox {
   background-color: white;
-  width: 28%;
+  width: 20%;
 }
 .pokemonName {
   color: yellow;
   font-size: 35px;
+  display: flex;
+  justify-content: center;
 }
-
 .inputBox {
   width: 191px;
 }

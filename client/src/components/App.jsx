@@ -16,6 +16,7 @@ class App extends React.Component {
     this.handleNameChangeClick = this.handleNameChangeClick.bind(this);
     this.handleSavePokemon = this.handleSavePokemon.bind(this);
     this.handleGetAllPokemon = this.handleGetAllPokemon.bind(this);
+    this.handleRemovePokemon = this.handleRemovePokemon.bind(this);
   }
   // LIFE CYCLE METHODS
   componentDidMount() {
@@ -107,40 +108,66 @@ class App extends React.Component {
   }
 
   handleGetAllPokemon() {
-    axios.get('http://localhost:3000/pokemon', () => {
+    axios.get('/pokemon', () => {
     })
     .then((data) => {
       this.setState({ favorites: data.data });
     })
   }
 
+  handleRemovePokemon() {
+    let currentPokemon = this.state.pokemon.name;
+    console.log('I want to remove ', currentPokemon);
+    axios.get(`/${currentPokemon}`, () => {
+    })
+    .then(() => {
+      console.log('Attempting to set pokemon free...');
+    })
+    .catch((error) => {
+      console.log('Pokemon refuses to leave your side!');
+    })
+    this.handleGetAllPokemon();
+  }
+
   // RENDER THE CODE
   render() {
     return (
       <div>
-        <div className="pokemonName">Pokémon Name</div>
-        <input type="text" className="inputBox" value={this.state.value}
-          onChange={ (e) => {this.handleNameChange(e)} }>
-        </input>
+        <div className="pokemonName"><center>Pokémon Name</center></div>
+        <center>
+          <input type="text" className="inputBox" value={this.state.value}
+            onChange={ (e) => {this.handleNameChange(e)} }>
+          </input>
+        </center>
         <br></br>
-        <button type="button" className="getPokemon" onClick={this.handleNameChangeClick}>
-          GET Pokémon
-        </button>
-        <button type="button" className="savePokemon" onClick={this.handleSavePokemon}>
-          Save Pokémon
-        </button>
-
-        <div className="mainBox">
-          <div><img src={this.state.pokemon.sprite}></img></div>
-          <div>ID: {this.state.pokemon.id}</div>
-          <div>Name: {this.state.pokemon.name}</div>
-          <div>Height: {this.state.pokemon.height}</div>
-          <div>Weight: {this.state.pokemon.weight}</div> 
-          <div>Type: {this.state.pokemon.type}</div>
-          <div>Description: {this.state.description}</div>
+        <div className="buttons">
+          <button type="button" className="getPokemon" onClick={this.handleNameChangeClick}>
+            GET Pokémon
+          </button>
+          <button type="button" className="savePokemon" onClick={this.handleSavePokemon}>
+            Save Pokémon
+          </button>
         </div>
-        
-        <FavoritesTable pokemons={this.state.favorites} />
+
+        <center>
+          <div className="mainBox">
+            <div><img src={this.state.pokemon.sprite}></img></div>
+            <div>ID: {this.state.pokemon.id}</div>
+            <div>Name: {this.state.pokemon.name}</div>
+            <div>Height: {this.state.pokemon.height}</div>
+            <div>Weight: {this.state.pokemon.weight}</div> 
+            <div>Type: {this.state.pokemon.type}</div>
+            <div>Description: {this.state.description}</div>
+          </div>
+        </center>
+        <center>
+          <button type="button" className="removePokemon" onClick={this.handleRemovePokemon}>
+            Remove Pokémon
+          </button>
+        </center>
+        <center>
+          <FavoritesTable pokemons={this.state.favorites} />
+        </center>
       </div>
     );
   }

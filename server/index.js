@@ -29,6 +29,13 @@ app.post('/pokemon', (request, response) => {
     }
   });
 });
+// This route should remove ONE pokemon from database
+app.get('/:pokename', (req, res) => {
+  let pokemon = req.params.pokename;
+  db.removePokemonForServer(pokemon);
+});
+
+
 
 app.listen(port, () => {
   console.log(`Good news, server is connected on port ${port}`);
