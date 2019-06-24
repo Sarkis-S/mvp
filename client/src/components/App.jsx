@@ -1,6 +1,7 @@
 
 import React from 'react';
 import axios from 'axios';
+import FavoritesTable from './FavoritesTable.jsx';
 
 class App extends React.Component {
   constructor(props) {
@@ -9,7 +10,7 @@ class App extends React.Component {
       name: '',
       pokemon: '',
       description: '',
-      favorites: ''
+      favorites: []
     }
     this.handleNameChange = this.handleNameChange.bind(this);
     this.handleNameChangeClick = this.handleNameChangeClick.bind(this);
@@ -49,8 +50,7 @@ class App extends React.Component {
         axios.get('http://localhost:3000/pokemon', () => {
         })
         .then((data) => {
-          this.setState({ favorites: data });
-          console.log(data);
+          this.setState({ favorites: data.data });
         })
       })
       .catch(error => {
@@ -133,6 +133,8 @@ class App extends React.Component {
           <div>Type: {this.state.pokemon.type}</div>
           <div>Description: {this.state.description}</div>
         </div>
+        
+        <FavoritesTable pokemons={this.state.favorites} />
       </div>
     );
   }
