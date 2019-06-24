@@ -4,11 +4,11 @@ const FavoritesRow = ({pokemon}) => {
   return (
     <tr>
       <td><img src={pokemon.sprite}></img></td>
-      <td>ID:{pokemon.id}</td>
-      <td>Name:{pokemon.name}</td>
-      <td>Height:{pokemon.height}</td>
-      <td>Weight:{pokemon.weight}</td>
-      <td>Type:{pokemon.type}</td>
+      <td><b>ID:</b> {pokemon.id},</td>
+      <td><b>Name:</b> {pokemon.name},</td>
+      <td><b>Height:</b> {pokemon.height},</td>
+      <td><b>Weight:</b> {pokemon.weight},</td>
+      <td><b>Type:</b> {pokemon.type}</td>
     </tr>
   );
 }

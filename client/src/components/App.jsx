@@ -15,6 +15,7 @@ class App extends React.Component {
     this.handleNameChange = this.handleNameChange.bind(this);
     this.handleNameChangeClick = this.handleNameChangeClick.bind(this);
     this.handleSavePokemon = this.handleSavePokemon.bind(this);
+    this.handleGetAllPokemon = this.handleGetAllPokemon.bind(this);
   }
   // LIFE CYCLE METHODS
   componentDidMount() {
@@ -46,12 +47,7 @@ class App extends React.Component {
           })
       })
       .finally(() => {
-        // PUll ALL FAVORITES FROM THE DATABASE
-        axios.get('http://localhost:3000/pokemon', () => {
-        })
-        .then((data) => {
-          this.setState({ favorites: data.data });
-        })
+        this.handleGetAllPokemon();
       })
       .catch(error => {
         console.log('Caught error from handleNameChangeClick:', error);
@@ -107,7 +103,17 @@ class App extends React.Component {
       .catch((error) => {
         console.log('ERROR:', error);
       })
+      this.handleGetAllPokemon();
   }
+
+  handleGetAllPokemon() {
+    axios.get('http://localhost:3000/pokemon', () => {
+    })
+    .then((data) => {
+      this.setState({ favorites: data.data });
+    })
+  }
+
   // RENDER THE CODE
   render() {
     return (
