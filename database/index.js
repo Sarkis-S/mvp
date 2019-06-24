@@ -20,4 +20,17 @@ const pokemonSchema = new mongoose.Schema({
 const Pokemon = mongoose.model('Pokemon', pokemonSchema);
 
 
+let getPokemonForServer = (callback => {
+  Pokemon.find(function(err, pokemons) {
+    if (err) {
+      console.log('You done goofed!');
+    } else {
+      callback(pokemons);
+    }
+  })
+  // Control how many shows up to client
+  // .limit(25)
+})
+
+module.exports.getPokemonForServer = getPokemonForServer;
 module.exports.Pokemon = Pokemon;

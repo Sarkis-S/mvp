@@ -8,7 +8,8 @@ class App extends React.Component {
     this.state = {
       name: '',
       pokemon: '',
-      description: ''
+      description: '',
+      favorites: ''
     }
     this.handleNameChange = this.handleNameChange.bind(this);
     this.handleNameChangeClick = this.handleNameChangeClick.bind(this);
@@ -37,10 +38,20 @@ class App extends React.Component {
             console.log('Description:', response.data.descriptions[1].description);
             this.setState({ description: response.data.descriptions[1].description});
           })
+          // This is when PokeAPI doesn't have description
           .catch(error => {
             this.setState({ description: 'No data from PokéAPI'})
             console.log('Caught error from handleNameChangeClick GET characterstic with', error);
           })
+      })
+      .finally(() => {
+        // PUll ALL FAVORITES FROM THE DATABASE
+        axios.get('http://localhost:3000/pokemon', () => {
+        })
+        .then((data) => {
+          this.setState({ favorites: data });
+          console.log(data);
+        })
       })
       .catch(error => {
         console.log('Caught error from handleNameChangeClick:', error);
@@ -76,6 +87,7 @@ class App extends React.Component {
             console.log('Description:', response.data.descriptions[1].description);
             this.setState({ description: response.data.descriptions[1].description});
           })
+          // This is when PokeAPI doesn't have descriptions
           .catch(error => {
             this.setState({ description: 'No data from PokéAPI'})
             console.log('Caught error from handleNameChangeClick GET characterstic with', error);
@@ -112,7 +124,7 @@ class App extends React.Component {
           Save Pokémon
         </button>
 
-        <div>
+        <div className="mainBox">
           <div><img src={this.state.pokemon.sprite}></img></div>
           <div>ID: {this.state.pokemon.id}</div>
           <div>Name: {this.state.pokemon.name}</div>

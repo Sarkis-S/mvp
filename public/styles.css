@@ -2,6 +2,10 @@ body {
   background: rgb(239, 83, 80);
 }
 
+.mainBox {
+  background-color: white;
+  width: 28%;
+}
 .pokemonName {
   color: yellow;
   font-size: 35px;
