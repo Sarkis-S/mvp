@@ -5,7 +5,7 @@ const FavoritesTable = ({pokemons}) => (
   <table>
     <tbody>
       {pokemons.map((pokemon) => {
-        return <FavoritesRow pokemon={pokemon} />
+        return <FavoritesRow pokemon={pokemon} key={pokemon.id} />
       })}
     </tbody>
   </table>
